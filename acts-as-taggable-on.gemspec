@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
   end
 
   gem.add_runtime_dependency 'activerecord', ['>= 4.2.8']
+  gem.add_runtime_dependency 'acts_as_tenant', ['>= 0.4.3']
 
   gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'mysql2', '~> 0.3'

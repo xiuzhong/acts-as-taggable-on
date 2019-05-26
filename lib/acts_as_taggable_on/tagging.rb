@@ -1,5 +1,10 @@
+require 'acts_as_tenant'
+
 module ActsAsTaggableOn
   class Tagging < ::ActiveRecord::Base #:nodoc:
+    ### BEHAVIOURS
+    acts_as_tenant(ActsAsTaggableOn.acts_as_tenant_model, foreign_key: ActsAsTaggableOn.acts_as_tenant_key)
+
     DEFAULT_CONTEXT = 'tags'
     belongs_to :tag, class_name: '::ActsAsTaggableOn::Tag', counter_cache: ActsAsTaggableOn.tags_counter
     belongs_to :taggable, polymorphic: true
@@ -15,7 +20,7 @@ module ActsAsTaggableOn
     validates_presence_of :context
     validates_presence_of :tag_id
 
-    validates_uniqueness_of :tag_id, scope: [:taggable_type, :taggable_id, :context, :tagger_id, :tagger_type]
+    validates_uniqueness_to_tenant :tag_id, scope: [:taggable_type, :taggable_id, :context, :tagger_id, :tagger_type]
 
     after_destroy :remove_unused_tags
 
