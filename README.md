@@ -492,6 +492,18 @@ If you want to change the default delimiter (it defaults to ','). You can also p
 ActsAsTaggableOn.delimiter = ','
 ```
 
+If you want to change the default tenant model (it defaults to ':company'):
+
+```ruby
+ActsAsTaggableOn.acts_as_tenant_model = :account
+```
+
+If you want to change the default tenant model foreign key (it defaults to '#{model}_id'):
+
+```ruby
+ActsAsTaggableOn.acts_as_tenant_key = 'accountID'
+```
+
 *NOTE 1: SQLite by default can't upcase or downcase multibyte characters, resulting in unwanted behavior. Load the SQLite ICU extension for proper handle of such characters. [See docs](http://www.sqlite.org/src/artifact?ci=trunk&filename=ext/icu/README.txt)*
 
 *NOTE 2: the option `force_binary_collation` is strongest than `strict_case_match` and when

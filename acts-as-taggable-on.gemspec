@@ -23,6 +23,9 @@ Gem::Specification.new do |gem|
   end
 
   gem.add_runtime_dependency 'activerecord', ['~> 5.0']
+  gem.add_runtime_dependency 'acts_as_tenant', ['>= 0.4.3']
+
+  gem.add_development_dependency 'pg'
 
   gem.add_development_dependency 'rspec-rails'
   gem.add_development_dependency 'rspec-its'

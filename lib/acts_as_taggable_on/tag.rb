@@ -1,6 +1,12 @@
 # encoding: utf-8
+
+require 'acts_as_tenant'
+
 module ActsAsTaggableOn
   class Tag < ::ActiveRecord::Base
+
+    ### BEHAVIOURS
+    acts_as_tenant(ActsAsTaggableOn.acts_as_tenant_model, foreign_key: ActsAsTaggableOn.acts_as_tenant_key)
 
     ### ASSOCIATIONS:
 
@@ -9,7 +15,7 @@ module ActsAsTaggableOn
     ### VALIDATIONS:
 
     validates_presence_of :name
-    validates_uniqueness_of :name, if: :validates_name_uniqueness?
+    validates_uniqueness_to_tenant :name, if: :validates_name_uniqueness?
     validates_length_of :name, maximum: 255
 
     # monkey patch this method if don't need name uniqueness validation
